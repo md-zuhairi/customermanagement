@@ -4,6 +4,7 @@ import com.zadeon.customermanagement.entity.Customer;
 import com.zadeon.customermanagement.service.customerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,9 @@ public class customerController {
     }
 
     @GetMapping("/all")
-    public String getAllCustomers(Model model){
-        model.addAttribute("customers", service.getAllCustomers());
+    public String getAllCustomers(Model model, @Param("keyword") String keyword){
+        model.addAttribute("customers", service.getAllCustomers(keyword));
+        model.addAttribute("keyword", keyword);
         return "customers";
     }
 
@@ -64,7 +66,7 @@ public class customerController {
 
     @GetMapping("/delete")
     public String getAllCustomersToDelete(Model model){
-        model.addAttribute("customers", service.getAllCustomers());
+        model.addAttribute("customers", service.getAllCustomers(null));
         return "delete_customer";
     }
 
@@ -74,7 +76,7 @@ public class customerController {
         return "redirect:/customers/all";
     }
     @PostMapping("/search")
-    public String getCustomerById(@ModelAttribute("customer") Customer customer, Model model) {
+    public String showCustomerById(@ModelAttribute("customer") Customer customer, Model model) {
         model.addAttribute("customer", service.getCustomerById(customer.getId()));
         return "redirect:/customers/search";
     }

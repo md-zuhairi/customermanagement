@@ -5,7 +5,7 @@ import com.zadeon.customermanagement.entity.Customer;
 import java.util.List;
 
 public interface customerService {
-    public List<Customer> getAllCustomers();
+    List<Customer> getAllCustomers(String keyword );
 
     Customer saveCustomer(Customer customer);
 

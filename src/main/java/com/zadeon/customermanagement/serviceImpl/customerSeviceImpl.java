@@ -16,7 +16,10 @@ public class customerSeviceImpl implements customerService {
         this.customerRepo = customerRepo;
     }
 
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers(String keyword) {
+        if (keyword != null) {
+            return customerRepo.search(keyword);
+        }
         return customerRepo.findAll();
     }
 
@@ -34,6 +37,7 @@ public class customerSeviceImpl implements customerService {
 
         return customerRepo.findById(id).get();
     }
+
 
     @Override
     public void deleteCustomerById(Long id) {
