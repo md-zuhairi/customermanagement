@@ -70,7 +70,7 @@ public class customerController {
         return "delete_customer";
     }
 
-    @GetMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteCustomer(@PathVariable Long id){
         service.deleteCustomerById(id);
         return "redirect:/customers/all";
