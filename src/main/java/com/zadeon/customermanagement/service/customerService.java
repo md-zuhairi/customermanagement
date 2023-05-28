@@ -7,6 +7,8 @@ import java.util.List;
 public interface customerService {
     List<Customer> getAllCustomers(String keyword);
 
+    Double getSales(String month, String year);
+
     Customer saveCustomer(Customer customer);
 
     Customer updateCustomer(Customer customer);

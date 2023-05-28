@@ -23,6 +23,11 @@ public class customerSeviceImpl implements customerService {
         return customerRepo.findAll();
     }
 
+    @Override
+    public Double getSales(String month, String year) {
+        return customerRepo.getSales(month, year);
+    }
+
     public Customer saveCustomer(Customer customer){
         return customerRepo.save(customer);
     }

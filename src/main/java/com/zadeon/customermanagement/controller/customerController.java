@@ -27,6 +27,14 @@ public class customerController {
             return "customers";
     }
 
+    @GetMapping("/sales")
+    public String getSales(Model model, @Param("month") String month, @Param("year") String year){
+        model.addAttribute("total", service.getSales(month, year));
+        model.addAttribute("month", month);
+        model.addAttribute("year", year);
+        return "sales";
+    }
+
     @GetMapping("/new")
     public String addNewCustomer(Model model)
     {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Details</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">CompuAsia</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/customers/all}">Show All</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/customers/sales}">Sales</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <br>
+  <br>
+  <div class="container">
+    <div class="row h-100 d-flex align-items-center justify-content-center">
+      <h1>Sales Report</h1>
+    </div>
+    <br>
+    <form th:action="@{/customers/sales}">
+      <label>Enter the Month :</label><br>
+      <input type="text" name="month" id="month" size="50" th:value="${month}" required />
+      <br>
+      <br>
+      <label>Enter the Year :</label><br>
+      <input type="text" name="year" id="year" size="50" th:value="${year}" required />
+      &nbsp;
+      <br>
+      <br>
+      <input class="btn btn-sm mb-2 btn-info" type="submit" value="Get Sales" />
+      &nbsp;
+      <input class="btn btn-sm mb-2 btn-info" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+    </form>
+    <br>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Total Sales</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${month}"></td>
+        <td th:text="${year}"></td>
+        <td th:text = "${total}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <script type="text/javascript">
+    function clearSearch() {
+      window.location = "[[@{/customers/sales}]]";
+    }
+  </script>
+
+</body>
+</html>
