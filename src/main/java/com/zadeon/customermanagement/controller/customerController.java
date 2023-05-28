@@ -1,6 +1,8 @@
 package com.zadeon.customermanagement.controller;
 
 import com.zadeon.customermanagement.entity.Customer;
+import com.zadeon.customermanagement.entity.User;
+import com.zadeon.customermanagement.service.UserService;
 import com.zadeon.customermanagement.service.customerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -13,7 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/customers")
 public class customerController {
+    @Autowired
     private customerService service;
+
+    @Autowired
+    private UserService userService;
 
     public customerController(customerService service){
         super();
@@ -24,6 +30,7 @@ public class customerController {
     public String getAllCustomers(Model model, @Param("keyword") String keyword){
             model.addAttribute("customers", service.getAllCustomers(keyword));
             model.addAttribute("keyword", keyword);
+            model.addAttribute("username", "Hakkim");
             return "customers";
     }
 
@@ -92,5 +99,30 @@ public class customerController {
     public String delete(Long id){
         service.deleteCustomerById(id);
         return "redirect:/customers/deletePage";
+    }
+    @GetMapping("/register")
+    public String getRegisterPage(Model model){
+        model.addAttribute("registerRequest", new User());
+        return "register";
+    }
+    @GetMapping("/login")
+    public String getLoginPage(Model model){
+        model.addAttribute("loginRequest", new User());
+        return "login_user";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute User user){
+        System.out.println("Register request: " + user);
+        User registeredUser = userService.registerUser(user.getLogin(), user.getPassword(), user.getEmail());
+        return registeredUser == null ? "error_page" : "redirect:/customers/login";
+    }
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute User user, Model model){
+        System.out.println("login request: " + user);
+        User authenticated = userService.authenticate(user.getLogin(), user.getPassword());
+        //model.addAttribute("username", authenticated.getLogin());
+        return authenticated == null ? "error_page" : "redirect:/customers/all";
     }
 }
