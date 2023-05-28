@@ -22,9 +22,9 @@ public class customerController {
 
     @GetMapping("/all")
     public String getAllCustomers(Model model, @Param("keyword") String keyword){
-        model.addAttribute("customers", service.getAllCustomers(keyword));
-        model.addAttribute("keyword", keyword);
-        return "customers";
+            model.addAttribute("customers", service.getAllCustomers(keyword));
+            model.addAttribute("keyword", keyword);
+            return "customers";
     }
 
     @GetMapping("/new")
@@ -64,20 +64,25 @@ public class customerController {
 
     }
 
-    @GetMapping("/delete")
+    @RequestMapping(value = "/deletePage", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String getAllCustomersToDelete(Model model){
         model.addAttribute("customers", service.getAllCustomers(null));
         return "delete_customer";
     }
 
-    @RequestMapping(value = "/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteCustomer(@PathVariable Long id){
-        service.deleteCustomerById(id);
-        return "redirect:/customers/all";
-    }
+//    @RequestMapping(value = "/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+//    public String deleteCustomer(@PathVariable Long id){
+//        service.deleteCustomerById(id);
+//        return "redirect:/customers/all";
+//    }
     @PostMapping("/search")
     public String showCustomerById(@ModelAttribute("customer") Customer customer, Model model) {
         model.addAttribute("customer", service.getCustomerById(customer.getId()));
         return "redirect:/customers/search";
+    }
+    @RequestMapping(value = "/delete", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(Long id){
+        service.deleteCustomerById(id);
+        return "redirect:/customers/deletePage";
     }
 }

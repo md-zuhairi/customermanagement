@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="col-lg-3">
-                <a th:href = "@{/customers/delete}" class="btn btn-danger btn-sm mb-3">Delete Record</a>
+                <a th:href = "@{/customers/deletePage}" class="btn btn-danger btn-sm mb-3">Delete Record</a>
             </div>
         </div>
         <br>
@@ -81,6 +81,7 @@
             </tbody>
         </table>
     </div>
+
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -97,5 +98,6 @@
             window.location = "[[@{/customers/all}]]";
         }
     </script>
+
 </body>
 </html>
