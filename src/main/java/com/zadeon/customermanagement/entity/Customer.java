@@ -10,7 +10,7 @@ import java.util.Date;
 public class Customer{
 
     @Id
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, unique = true)
     private long id;
     //@Column(name = "cust_name")
     private String customerName;

@@ -10,29 +10,39 @@
     <link href="/webjars/bootstrap/4.0.0-2/css/bootstrap.css"/>
     <script type="text/javascript" src="/webjars/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+    <style>
+    	.table-responsive {
+    		max-height:300px;
+		}
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">CompuAsia</a>
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: #89375F;">
+        <!-- Brand -->
+        <a class="navbar-brand" style="color: #FFFFFF;" href="#"><strong>Compuasia</strong></a>
 
-    <!-- Toggler/collapsibe Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/customers/all}">Show All</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/customers/sales}">Sales</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #FFFFFF;" th:href="@{/customers/all}">Show All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: #FFFFFF;" th:href="@{/customers/sales}">Sales</a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                    <div style="color:#FFFFFF" class="nav-item active align-content-end">
+                        <h6>Welcome, <span>Hakkim</span></h6>
+                    </div>
+                </span>
+        </div>
+    </nav>
 <br>
 <br>
 <div class="container">
@@ -63,7 +73,7 @@
             <input class="btn btn-sm mb-2 btn-info" type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
         </form>
     <br>
-    <table class="table thead-light">
+    <table class="table thead-light table-responsive">
         <thead>
         <tr>
             <th>Bill Number</th>
